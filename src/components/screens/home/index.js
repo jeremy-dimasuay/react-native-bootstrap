@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Navigation } from 'utils/prop-types';
 import { DrawerNavigator, DrawerItems, NavigationActions } from 'react-navigation';
 import { Text, View } from 'react-native';
-import Icon from 'components/icon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './home';
 import SettingsScreen from './settings';
 

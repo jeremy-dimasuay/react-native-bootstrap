@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
-
+import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 import HomeScreen from 'components/screens/home';
 import LoginScreen from 'components/screens/login';
 import WelcomeScreen from 'components/screens/welcome';
@@ -41,7 +41,13 @@ export const AppNavigator = StackNavigator(
 );
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
-    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
+    <AppNavigator
+        navigation={addNavigationHelpers({
+            dispatch,
+            state: nav,
+            addListener: createReduxBoundAddListener('root')
+        })}
+    />
 );
 
 AppWithNavigationState.propTypes = propTypes;
