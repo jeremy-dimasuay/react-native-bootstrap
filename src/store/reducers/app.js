@@ -1,4 +1,6 @@
-const initialState = { greeting: 'Hello world!' };
+const initialState = {
+    greeting: 'Hello world!'
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {

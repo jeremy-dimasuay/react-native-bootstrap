@@ -24,13 +24,9 @@ Used to bootstrap all my upcoming mobile projects.
 
 `yarn test`
 
-### Break down into end to end tests
-
-TBA
-
 ### And coding style tests
 
-TBA
+`yarn lint`
 
 ## Built With
 

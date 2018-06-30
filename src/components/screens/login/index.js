@@ -54,7 +54,7 @@ export class Login extends React.PureComponent {
                 )}
                 <Button
                     raised
-                    onPress={() => { this.props.login(navigation); }}
+                    onPress={() => { this.props.login(navigation, 'Home'); }}
                     title="SUBMIT"
                 />
             </View>

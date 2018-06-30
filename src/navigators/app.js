@@ -1,24 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import HomeScreen from 'components/screens/home';
 import LoginScreen from 'components/screens/login';
 import WelcomeScreen from 'components/screens/welcome';
-import { Reducer } from 'utils/prop-types';
 
 const propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    nav: Reducer.isRequired,
 };
 
-export const AppNavigator = StackNavigator(
+export const AppNavigator = createStackNavigator(
     {
-        Home: {
-            screen: HomeScreen,
+        Welcome: {
+            screen: WelcomeScreen,
             navigationOptions: () => ({
-                title: 'Home',
+                title: 'Welcome',
                 header: null
             }),
         },
@@ -29,25 +25,28 @@ export const AppNavigator = StackNavigator(
                 header: null
             })
         },
-        Welcome: {
-            screen: WelcomeScreen,
+        Home: {
+            screen: HomeScreen,
             navigationOptions: () => ({
-                title: 'Welcome',
+                title: 'Home',
                 header: null
             }),
         },
     },
-    {}
+    {
+        initialRouteName: 'Welcome',
+    }
 );
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
+const AppWithNavigationState = () => (
+    <AppNavigator />
 );
+
+// eslint-disable-next-line no-unused-vars
+function mapStateToProps(state) {
+    return {};
+}
 
 AppWithNavigationState.propTypes = propTypes;
-
-const mapStateToProps = state => ({
-    nav: state.nav,
-});
 
 export default connect(mapStateToProps)(AppWithNavigationState);

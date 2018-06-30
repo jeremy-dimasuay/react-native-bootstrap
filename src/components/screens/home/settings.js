@@ -8,7 +8,7 @@ import { View } from 'react-native';
 const propTypes = {
     navigation: Navigation.isRequired,
     screenProps: PropTypes.shape({
-        onLogout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired
     }).isRequired
 };
 const defaultProps = {};
@@ -25,7 +25,7 @@ export const Settings = props => (
         <View><Text>This is the Settings for the app!</Text></View>
         <Button
             raised
-            onPress={() => props.screenProps.onLogout()}
+            onPress={() => { props.screenProps.logout(props.navigation, 'Welcome'); }}
             title="LOGOUT"
         />
     </View>

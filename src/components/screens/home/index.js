@@ -1,13 +1,18 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Navigation } from 'utils/prop-types';
-import { DrawerNavigator, DrawerItems, NavigationActions } from 'react-navigation';
+import { DrawerNavigator, DrawerItems } from 'react-navigation';
 import { Text, View } from 'react-native';
 import Icon from 'components/icon';
+import { logout } from 'store/sagas';
 import HomeScreen from './home';
 import SettingsScreen from './settings';
 
+
 const propTypes = {
-    navigation: Navigation.isRequired
+    navigation: Navigation.isRequired,
+    logout: PropTypes.func.isRequired
 };
 const defaultProps = {};
 
@@ -62,23 +67,18 @@ class RootHome extends PureComponent {
     constructor() {
         super();
 
-        this.onLogout = this.onLogout.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
-    onLogout() {
-        this.props.navigation.dispatch(NavigationActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({ routeName: 'Welcome' })
-            ]
-        }));
+    logout() {
+        this.props.logout(this.props.navigation, 'Welcome');
     }
 
     render() {
         return (
             <Drawer
                 screenProps={{
-                    onLogout: this.onLogout
+                    logout: this.logout
                 }}
             />
         );
@@ -87,4 +87,15 @@ class RootHome extends PureComponent {
 
 RootHome.propTypes = propTypes;
 RootHome.defaultProps = defaultProps;
-export default RootHome;
+
+// eslint-disable-next-line no-unused-vars
+function mapStateToProps(state) {
+    return {};
+}
+
+RootHome.propTypes = propTypes;
+RootHome.defaultProps = defaultProps;
+
+export default connect(mapStateToProps, {
+    logout
+})(RootHome);
